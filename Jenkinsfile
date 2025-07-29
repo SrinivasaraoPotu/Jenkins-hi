@@ -1,26 +1,18 @@
 pipeline {
-  agent any
-  stages {
-    stage('Checkout') {
-      steps {
-        git 'https://github.com/SrinivasaraoPotu/Jenkins-hi.git'
-      }
+    agent any
+    stages {
+        stage('Clone') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/SrinivasaraoPotu/Jenkins-hi.git',
+                    credentialsId: 'github-token'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
     }
-    stage('Build') {
-      steps {
-        echo 'Building the app...'
-      }
-    }
-    stage('Test') {
-      steps {
-        echo 'Running unit tests...'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        echo 'Deploying the app...'
-      }
-    }
-  }
 }
 
